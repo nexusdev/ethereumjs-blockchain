@@ -139,7 +139,6 @@ Blockchain.prototype._putBlock = function (block, cb, _genesis) {
   if (block.constructor !== Block) {
     block = new Block(block)
   }
-
   async.series([
 
     function verify (cb2) {
@@ -242,6 +241,7 @@ Blockchain.prototype._putBlock = function (block, cb, _genesis) {
           // don't rebuild forked chains - to much overhead
           // maybe readd this later
           // self._rebuildBlockchain(blockHash, block.header.parentHash, parentDetails, dbOps, cb2)
+          cb2()
         } else {
           self.meta.genesis = blockHash
           cb2()
