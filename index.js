@@ -239,7 +239,9 @@ Blockchain.prototype._putBlock = function (block, cb, _genesis) {
         })
 
         if (!block.isGenesis()) {
-          self._rebuildBlockchain(blockHash, block.header.parentHash, parentDetails, dbOps, cb2)
+          // don't rebuild forked chains - to much overhead
+          // maybe readd this later
+          // self._rebuildBlockchain(blockHash, block.header.parentHash, parentDetails, dbOps, cb2)
         } else {
           self.meta.genesis = blockHash
           cb2()
